@@ -1,0 +1,285 @@
+@import "variable";
+
+.footer {
+  position: relative;
+
+  color: $COLOR_WHITE_1;
+  background-color: $COLOR_COSMOS;
+  display: flex;
+  justify-content: center;
+
+  // новогоднее оформление
+  //&::before {
+  //  content: '';
+  //
+  //  display: block;
+  //  position: absolute;
+  //  z-index: 0;
+  //
+  //  left: 0;
+  //  top: 0;
+  //
+  //  width: 100%;
+  //  height: 100%;
+  //
+  //  opacity: 0.3;
+  //
+  //  background-image: url("https://s.sweb.ru/img/icons/NY-pattern.svg");
+  //  background-position: top;
+  //}
+
+  &__grid {
+    width: 100%;
+    max-width: 1420px;
+    padding: 40px 52px 32px 52px;
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 24px;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas:
+            repeat-value("become-partner", 4) + repeat-value("nav-links", 4) + repeat-value("phones-block", 4)
+            repeat-value("become-partner", 4) + repeat-value("nav-links", 4) + repeat-value("download-app", 4)
+            repeat-value("copyright", 12)
+  }
+
+  .grid-item {
+    @include baseBlock;
+
+    &__become-partner {
+      grid-area: become-partner;
+      margin-left: -15px;
+    }
+    &__nav-links {
+      grid-area: nav-links;
+    }
+    &__download-app {
+      grid-area: download-app;
+    }
+    &__phones-block {
+      grid-area: phones-block;
+    }
+    &__copyright {
+      grid-area: copyright;
+      align-self: end;
+      padding-top: 8px;
+    }
+  }
+
+  &__title {
+    display: inline-block;
+    margin-bottom: 13px;
+    @include text1Medium;
+  }
+
+  .become-partner {
+    height: 236px;
+    width: 357px;
+    background: url(../images/footer_left.svg) no-repeat;
+    padding-top: 32px;
+    padding-left: 55px;
+    box-sizing: border-box;
+
+    &__title {
+      margin-bottom: 12px;
+      display: inline-block;
+      @include text2Medium;
+    }
+
+    &__list {
+      &-title {
+        margin-bottom: 4px;
+      }
+      &-items {
+        padding-left: 10px;
+      }
+      &-item {
+        position: relative;
+
+        &:before {
+          content: "•";
+          position: absolute;
+          width: 10px;
+          height: 19px;
+          top: 0;
+          left: -10px;
+        }
+      }
+    }
+    &__button {
+      height: 30px;
+      margin: 20px 0 0;
+      padding: 0 20px;
+
+      border-radius: 5px;
+      background: $COLOR_BASIC_BLUE;
+      color: $COLOR_WHITE_1;
+
+      @include buttonText;
+
+      &:hover {
+        background: $COLOR_BASIC_BLUE_HOVER;
+      }
+      &:active {
+        background: $COLOR_BASIC_BLUE_ACTIVE;
+      }
+    }
+  }
+  .nav-links {
+    &__columns {
+      display: flex;
+      gap: 72px;
+    }
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      &-item {
+        @include extraTextRegular;
+
+        &:hover {
+          opacity: 0.9;
+        }
+
+        &_link {
+          color: $COLOR_WHITE_1;
+          position: relative;
+          text-decoration: none;
+
+          &:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-bottom: 1px solid $COLOR_WHITE_1;
+            opacity: 0.1;
+          }
+        }
+      }
+    }
+  }
+
+  .download-app__links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .download-app__link {
+    height: 40px;
+
+    & img {
+      width: 122px;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+  .phones-block__item:not(:last-child) {
+    margin-bottom: 4px;
+  }
+  .phones-block__phone {
+    cursor: default;
+    text-decoration: none;
+    color: $COLOR_WHITE_1;
+  }
+  .phones-block__location {
+    color: $COLOR_GREY_3;
+  }
+
+  .social-links {
+    margin-top: 12px;
+    &__items {
+      display: flex;
+      gap: 20px;
+    }
+    &__item {
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .copyright__text {
+    margin-bottom: 0;
+    color: $COLOR_GREY_3;
+    @include smallTextRegular;
+  }
+}
+
+@media #{$md-max} {
+  .footer {
+    &__grid {
+      padding: 40px 40px 32px 40px;
+      grid-template-areas:
+              repeat-value("become-partner", 5) + repeat-value("nav-links", 7)
+              repeat-value("become-partner", 5) + repeat-value("download-app", 7)
+              repeat-value("phones-block", 5) + repeat-value("download-app", 7)
+              repeat-value("phones-block", 5) + repeat-value("download-app", 7)
+              repeat-value("phones-block", 5) + repeat-value("copyright", 7)
+              repeat-value("phones-block", 5) + repeat-value(".", 7)
+    }
+    .grid-item {
+      &__phones-block {
+        padding-top: 8px;
+      }
+    }
+  }
+}
+
+@media #{$tb-max} {
+  .footer {
+    &__grid {
+      grid-template-areas:
+              repeat-value("become-partner", 6) + repeat-value("nav-links", 6)
+              repeat-value("phones-block", 6) + repeat-value("download-app", 6)
+              repeat-value("copyright", 12)
+    }
+    .nav-links {
+      &__columns {
+        flex-direction: column;
+        gap: 24px;
+      }
+      &__list {
+        gap: 16px;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+  }
+}
+
+@media #{$sm-max} {
+  .footer {
+    &__grid {
+      padding: 32px 20px;
+      grid-template-columns: 1fr;
+      grid-template-areas:  "become-partner"
+                            "nav-links"
+                            "download-app"
+                            "phones-block"
+                            "copyright"
+    }
+    .grid-item {
+      &__nav-links {
+        padding-top: 8px;
+      }
+    }
+    .grid-item__become-partner {
+      margin: 0;
+
+      .become-partner {
+        padding: 0;
+        margin: 0;
+        background-image: none;
+        width: auto;
+        height: auto;
+      }
+    }
+    .copyright__text {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,131 @@
+@import "variable";
+
+.header {
+  position: relative;
+
+  width: 100%;
+  height: 60px;
+  background-color: $COLOR_COSMOS;
+  color: $COLOR_WHITE_1;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+
+  // новогоднее оформление
+  //&::before {
+  //  content: '';
+  //
+  //  display: block;
+  //  position: absolute;
+  //  z-index: 0;
+  //
+  //  left: 0;
+  //  top: 0;
+  //
+  //  width: 100%;
+  //  height: 100%;
+  //
+  //  opacity: 0.3;
+  //
+  //  background-image: url("https://s.sweb.ru/img/icons/NY-pattern.svg");
+  //  background-position: top;
+  //}
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1420px;
+    align-items: center;
+    margin: 0 40px;
+    transition: .4s;
+  }
+
+  &__logo {
+    position: relative;
+    text-decoration: none;
+
+    &_block{
+      position: absolute;
+      left: 0;
+      @include positionCenterTop;
+
+      width: 160px;
+      height: 20px;
+
+      // новогоднее оформление
+      //height: 30px;
+    }
+
+    &_title {
+      margin-left: 176px;
+
+      @include subTitle;
+      text-decoration: none;
+      color: $COLOR_WHITE_1;
+    }
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &__link {
+    position: relative;
+    padding-right: 21px;
+
+    @include subTitle;
+    color: $COLOR_BASIC_BLUE;
+    text-decoration: none;
+
+    &:hover {
+      .header__link_icon path {
+        stroke: $COLOR_BASIC_BLUE_HOVER
+      }
+    }
+    &:active {
+      .header__link_icon path {
+        stroke: $COLOR_BASIC_BLUE_ACTIVE
+      }
+    }
+
+    &_icon {
+      position: absolute;
+      @include positionCenterTop;
+      right: 0;
+      width: 13px;
+      height: 13px;
+    }
+  }
+}
+
+@media #{$sm-max} {
+    .header {
+      &__container {
+        margin: 0 20px;
+        transition: .4s;
+      }
+      &__logo {
+        &_block {
+          width: 42px;
+        }
+        &_text {
+          display: none;
+        }
+        &_title {
+          margin-left: 58px;
+        }
+      }
+
+      &__link {
+        padding-right: 11px;
+        @include extraTextMedium;
+
+        &_icon {
+          width: 9px;
+          height: 9px;
+        }
+      }
+    }
+}

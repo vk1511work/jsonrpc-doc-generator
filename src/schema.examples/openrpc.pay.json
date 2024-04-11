@@ -1,0 +1,421 @@
+{
+  "openrpc": "1.0.0-rc1",
+  "info": {
+    "title": "API Spaceweb",
+    "description": "Документация по API Spaceweb",
+    "version": "1.185"
+  },
+  "servers": [
+    {
+      "name": "Оплата",
+      "summary": "Оплата",
+      "description": "Основные функции:\n\nинформация о балансе,\nрекомендации к оплате,\nуправление отсрочкой",
+      "url": "https://api.sweb.ru/pay"
+    }
+  ],
+  "methods": [
+    {
+      "name": "index",
+      "description": "Информация о балансе",
+      "params": [],
+      "result": {
+        "$ref": "#/components/contentDescriptors/resultindex"
+      },
+      "examples": [
+        {
+          "name": "exampleIndex",
+          "params": [],
+          "result": {
+            "$ref": "#/components/examples/resultindex"
+          }
+        }
+      ]
+    },
+    {
+      "name": "isAutopaymentEnable",
+      "description": "Включен или нет автоплатеж на аккаунте",
+      "params": [],
+      "result": {
+        "$ref": "#/components/contentDescriptors/resultboolean"
+      },
+      "examples": [
+        {
+          "name": "exampleIsAutopaymentEnable",
+          "params": [],
+          "result": {
+            "$ref": "#/components/examples/resultboolean"
+          }
+        }
+      ]
+    },
+    {
+      "name": "getPayRecommendations",
+      "description": "Получение рекомендаций к оплате",
+      "params": [],
+      "result": {
+        "$ref": "#/components/contentDescriptors/resultgetPayRecommendations"
+      },
+      "examples": [
+        {
+          "name": "exampleGetPayRecommendations",
+          "params": [],
+          "result": {
+            "$ref": "#/components/examples/resultgetPayRecommendations"
+          }
+        }
+      ]
+    },
+    {
+      "name": "getRecommendationTotalCost",
+      "description": "Возвращает полную сумму, рекомендованную к оплате",
+      "params": [],
+      "result": {
+        "$ref": "#/components/contentDescriptors/resultgetRecommendationTotalCost"
+      },
+      "examples": [
+        {
+          "name": "exampleGetRecommendationTotalCost",
+          "params": [],
+          "result": {
+            "$ref": "#/components/examples/resultgetRecommendationTotalCost"
+          }
+        }
+      ]
+    },
+    {
+      "name": "getUpcomingPaymentsVh",
+      "description": "Возвращает информацию о предстоящих платежах для пользователей VH",
+      "params": [],
+      "result": {
+        "$ref": "#/components/contentDescriptors/resultgetUpcomingPaymentsVh"
+      },
+      "examples": [
+        {
+          "name": "exampleGetUpcomingPaymentsVh",
+          "params": [],
+          "result": {
+            "$ref": "#/components/examples/resultgetUpcomingPaymentsVh"
+          }
+        }
+      ]
+    },
+    {
+      "name": "changeDeferment",
+      "description": "Включить/выключить отсрочку",
+      "params": [
+        {
+          "name": "turnOn",
+          "description": "true - включить, false - выключить",
+          "schema": {
+            "$ref": "#/components/schemas/Boolean"
+          },
+          "required": true
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/resultInt"
+      },
+      "examples": [
+        {
+          "name": "exampleChangeDeferment",
+          "params": [
+            {
+              "$ref": "#/components/examples/turnOn"
+            }
+          ],
+          "result": {
+            "$ref": "#/components/examples/integerOne"
+          }
+        }
+      ]
+    },
+    {
+      "name": "getRemainsDate",
+      "description": "Дата, до которой хватит денег на счету",
+      "params": [],
+      "result": {
+        "$ref": "#/components/contentDescriptors/resultgetRemainsDate"
+      },
+      "examples": [
+        {
+          "name": "exampleGetRemainsDate",
+          "params": [],
+          "result": {
+            "$ref": "#/components/examples/resultgetRemainsDate"
+          }
+        }
+      ]
+    },
+    {
+      "name": "getRemainsDays",
+      "description": "Количество дней до блокировки",
+      "params": [],
+      "result": {
+        "$ref": "#/components/contentDescriptors/resultgetRemainsDays"
+      },
+      "examples": [
+        {
+          "name": "exampleGetRemainsDate",
+          "params": [],
+          "result": {
+            "$ref": "#/components/examples/resultgetRemainsDays"
+          }
+        }
+      ]
+    },
+    {
+      "name": "getBalance",
+      "description": "Информация о балансе",
+      "params": [],
+      "result": {
+        "$ref": "#/components/contentDescriptors/resultgetBalance"
+      },
+      "examples": [
+        {
+          "name": "exampleGetBalance",
+          "params": [],
+          "result": {
+            "$ref": "#/components/examples/resultgetBalance"
+          }
+        }
+      ]
+    },
+    {
+      "name": "getActiveReserves",
+      "description": "Детальная информация о заблокированных средствах",
+      "params": [],
+      "result": {
+        "$ref": "#/components/contentDescriptors/resultgetActiveReserves"
+      },
+      "examples": [
+        {
+          "name": "exampleGetActiveReserves",
+          "params": [],
+          "result": {
+            "$ref": "#/components/examples/resultgetActiveReserves"
+          }
+        }
+      ]
+    }
+    
+
+  ],
+  "components": {
+    "contentDescriptors": {
+      "resultInt": {
+        "name": "resultInt",
+        "description": "1 - успешно, 0 - ошибка",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "resultindex": {
+        "name": "resultIndex",
+        "description": "'real_balance' float Реальные деньги\n\n'bonus_balance' float Бонусные деньги\n\n'auto_payment_enable' int Подключен ли автоплатеж\n\n'isAutopaymentEnable' int Доступны ли автоплатежи\n\n'domainBonuses' int Количество доменных бонусов\n\n'status' string Статус аккаунта\n\n'blockInfo' string Причина блокировки аккаунта\n\n'blockedMoney' float Заблокированные деньги\n\n'deferment' ('show' показывать отсрочку, 'value' дней отсрочки)\n\n'edgeDate' string Дата с которой доступны документы",
+        "schema": {
+          "type": "array"
+        }
+      },
+      "resultboolean": {
+        "name": "resultBoolean",
+        "description": "true - включен, false - выключен",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "resultgetPayRecommendations": {
+        "name": "resultGetPayRecommendations",
+        "description": "'recommended_for_pay' array Массив рекомендаций\n\n'exist_domain_bonus' int Количество доменных бонусов\n\n'total_frp_balance' int Реальный баланс\n\n'tariff_domain_bonus' int Бонусы за оплату тарифа\n\n'tariff_domain_bonus_tld' int Бонусы на конкретные зоны\n\n'domain_bonuses_by_tld' array Детализация по бонусам на конкретные зоны",
+        "schema": {
+          "type": "array"
+        }
+      },
+      "resultgetRecommendationTotalCost": {
+        "name": "resultGetRecommendationTotalCost",
+        "description": "Полная сумма, рекомендованная к оплате",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "resultgetUpcomingPaymentsVh": {
+        "name": "resultGetUpcomingPaymentsVh",
+        "description": "'name' string Название услуги\n\n'cost' int Стоимость\n\n'cost_str' string Стоимость строчкой\n\n'action' int (1 - если доступна регистрация за бонус, 0 - недоступна)",
+        "schema": {
+          "type": "array"
+        }
+      },
+      "resultgetRemainsDate": {
+        "name": "resultGetRemainsDate",
+        "description": "'d.m.Y'",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "resultgetRemainsDays": {
+        "name": "resultGetRemainsDays",
+        "description": "Количество дней до блокировки",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "resultgetBalance": {
+        "name": "resultGetBalance",
+        "description": "'real_balance' float Реальные деньги\n\n'bonus_balance' float Бонусные деньги",
+        "schema": {
+          "type": "array"
+        }
+      },
+      "resultgetActiveReserves": {
+        "name": "resultGetActiveReserves",
+        "description": "'charge' float Остаток заблокированных средств\n\n'info' Информация о блокировке:\n\n'title' string Название услуги\n\n'endDate' string Дата окончания блокировки",
+        "schema": {
+          "type": "array"
+        }
+      }
+    },
+    "schemas": {
+      "Integer": {
+        "type": "integer"
+      },
+      "String": {
+        "type": "string"
+      },
+      "Boolean": {
+        "type": "boolean"
+      },
+      "Array": {
+        "type": "array"
+      },
+      "Object": {
+        "type": "object"
+      }
+    },
+    "examples": {
+      "resultindex": {
+        "name": "resultIndex",
+        "summary": "resultIndex",
+        "description": "Информация о балансе",
+        "value": [
+          {
+          "balance": {
+            "real_balance": 30,
+            "bonus_balance": 0
+        },
+        "auto_payment_enable": 0,
+        "isAutopaymentEnable": 1,
+        "domainBonuses": 0,
+        "status": "active",
+        "blockInfo": {
+            "days_date": "07.02.2023",
+            "days": 0,
+            "days_word": "дней"
+        },
+        "blockedMoney": 0,
+        "deferment": {
+            "show": false,
+            "value": 0
+        },
+        "edgeDate": "2022-11-14"
+      }
+        ]
+      },
+      "resultboolean": {
+        "name": "resultBoolean",
+        "summary": "resultboolean",
+        "description": "Включен или нет автоплатеж на аккаунте",
+        "value": false
+      },
+      "resultgetPayRecommendations": {
+        "name": "resultGetPayRecommendations",
+        "summary": "resultgetPayRecommendations",
+        "description": "Рекомендации к оплате",
+        "value": [
+          {
+        "recommended_for_pay": [],
+        "exist_domain_bonus": 1,
+        "total_frp_balance": 0,
+        "tariff_domain_bonus": 0,
+        "tariff_domain_bonus_tld": "any",
+        "domain_bonuses_by_tld": []
+          }          
+        ]
+      },
+      "resultgetRecommendationTotalCost": {
+        "name": "resultGetRecommendationTotalCost",
+        "summary": "resultgetRecommendationTotalCost",
+        "description": "Полная сумма, рекомендованная к оплате",
+        "value": 949
+      },
+      "resultgetUpcomingPaymentsVh": {
+        "name": "resultGetUpcomingPaymentsVh",
+        "summary": "resultgetUpcomingPaymentsVh",
+        "description": "Информация о предстоящих платежах для пользователей VH",
+        "value": [
+          {
+            "id": 1,
+            "name": "Тариф \"Взлёт\" (1 мес.)",
+            "date": "23.02.2023",
+            "cost": 199,
+            "cost_str": "199 р.",
+            "entity_type": "tariff",
+            "action": 0,
+            "checkbox_available": 0,
+            "tariff_domain_bonus": 0,
+            "tariff_domain_bonus_tld": "any",
+            "exts": []
+        }                
+        ]
+      },
+      "turnOn": {
+        "name": "turnOn",
+        "summary": "turnOn",
+        "description": "true - включить отсрочку, false - выключить отсрочку",
+        "value": "false"
+      },
+      "integerOne": {
+        "name": "one",
+        "summary": "успех",
+        "description": "Ответ при успешно выполненной операции",
+        "value": 1
+      },
+      "resultgetRemainsDate": {
+        "name": "resultGetRemainsDate",
+        "summary": "resultgetRemainsDate",
+        "description": "Дата, до которой хватит денег на счету",
+        "value": "01.10.2023"
+      },
+      "resultgetRemainsDays": {
+        "name": "resultGetRemainsDays",
+        "summary": "resultgetRemainsDays",
+        "description": "Количество дней до блокировки",
+        "value": 15
+      },
+      "resultgetBalance": {
+        "name": "resultGetBalance",
+        "summary": "resultgetBalance",
+        "description": "Информация о балансе",
+        "value": [
+          {
+        "real_balance": 343.61000000000001,
+        "bonus_balance": 0
+          }  
+        ]
+      },
+      "resultgetActiveReserves": {
+        "name": "resultGetActiveReserves",
+        "summary": "resultgetActiveReserves",
+        "description": "Детальная информация о заблокированных средствах",
+        "value": [
+          {
+            "charge":1908,
+            "info":{
+                "title": "Тариф \"Взлёт на год\" ",
+                "endDate":"2023-12-15"
+             },
+            "type":"tariff"
+         }  
+        ]
+      }
+    }
+  }
+}

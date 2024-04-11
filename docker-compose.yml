@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  
+  #OpenRPCDB
+  "open-rpc-doc-build":
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: "ORPC_db"
+    restart: unless-stopped
+    tty: true
+    volumes:
+       - ./src:/app/src
+       - ./public:/app/public
+       - ./package.json:/app/package.json
+       - ./tsconfig.json:/app/tsconfig.json
+    command: sh -c "
+        yarn run build
+        && yarn start
+      "
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

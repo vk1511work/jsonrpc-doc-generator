@@ -1,0 +1,343 @@
+@import "../variable";
+
+.content {
+  @include baseBlock;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-column-gap: 20px;
+  padding: 20px 0 0;
+
+  &_block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__container {
+    @include baseBlock;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: 20px;
+  }
+  &__title {
+    @include baseBlock;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+
+    &_h1 {
+      @include title;
+    }
+
+    &_h2 {
+      @include subTitle;
+    }
+
+    &_description {
+      @include extraTextRegular;
+      color: $COLOR_GREY_4;
+      text-transform: lowercase;
+      margin-left: 12px;
+      margin-bottom: 3px;
+    }
+
+    &_main {
+      @include grid-column(1, 11);
+    }
+  }
+  &__server {
+    display: grid;
+    @include grid-column(1, 11);
+    grid-template-columns: 5fr 6fr;
+    grid-gap: 16px 20px;
+    grid-template-rows: min-content;
+    margin-top: 16px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid $COLOR_GREY_1;
+
+    &_methods {
+      @include baseBlock;
+
+      display: flex;
+      flex-direction: column;
+    }
+    &_method {
+      width: min-content;
+      margin-left: 10px;
+      text-decoration: underline;
+      text-decoration-skip-ink: none;
+      height: 21px;
+      cursor: pointer;
+      position: relative;
+      margin-bottom: 2px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      &:before {
+        content: "•";
+        position: absolute;
+        width: 10px;
+        height: 19px;
+        top: 0;
+        left: -10px;
+      }
+    }
+  }
+
+  &__method {
+    display: grid;
+    @include grid-column(1, 11);
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content;
+    grid-gap: 24px;
+    margin-top: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid $COLOR_GREY_1;
+
+    &_instruction {
+      margin-top: 16px;
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    &_table {
+      padding: 5px 8px;
+      height: min-content;
+      border-bottom: 1px solid $COLOR_GREY_1;
+
+      &-container {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+      }
+
+      &-item {
+        display: grid;
+        grid-template-columns: max-content max-content 6fr;
+        grid-template-rows: auto;
+        grid-gap: 20px;
+        padding: 5px 0;
+
+        & .content__method_table-text {
+          width: min-content;
+
+          &:first-of-type {
+            margin-left: 8px;
+          }
+
+          &:last-of-type {
+            width: 100%;
+            margin-right: 8px;
+          }
+        }
+      }
+
+      &:hover {
+        background-color: $COLOR_WHITE_2;
+      }
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+
+      &-text {
+        width: 100%;
+      }
+    }
+    &_json {
+      position: relative;
+      background-color: $COLOR_JSON_WRAPPER;
+      padding: 20px 6px 20px 20px;
+      border-radius: 4px;
+      max-height: 320px;
+      box-sizing: border-box;
+
+      &-button {
+        position: absolute;
+        top: 25px;
+        right: 20px;
+        width: 16px;
+        height: 16px;
+        padding: 0;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+    &_text {
+      position: relative;
+      background-color: $COLOR_JSON_WRAPPER;
+      padding: 20px;
+      border-radius: 4px;
+    }
+  }
+
+  &__element {
+    &_container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &_title {
+      display: inline-block;
+      @include extraTextRegular;
+      color: $COLOR_GREY_4;
+      margin-bottom: 8px;
+    }
+
+  }
+
+  &__examples {
+    margin-top: 16px;
+    @include grid-column(1, 11);
+
+    &_file.prettyprint {
+      background-color: $COLOR_COSMOS;
+      color: unset;
+    }
+  }
+
+  &__instruction {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content;
+    grid-gap: 24px;
+
+    &_container {
+      display: flex;
+      flex-direction: column;
+    }
+    &_code.language-javascript {
+      background-color: $COLOR_JSON_WRAPPER;
+      padding: 0 44px 0 0;
+      margin: 0;
+      border-radius: 4px;
+
+      & code {
+        font-family: monospace, Verdana, Geneva, sans-serif;
+        white-space: pre-wrap;
+        word-wrap: anywhere;
+        background-color: unset;
+
+        @include textCode;
+
+        &.simple {
+          color: $COLOR_JSON_SIMPLE;
+          & span {
+            color: $COLOR_JSON_SIMPLE;
+          }
+        }
+        &.token_api {
+          color:$COLOR_JSON_SIMPLE;
+          & .operator,
+          & .property,
+          & .constant {
+            color: $COLOR_JSON_SIMPLE;
+          }
+          & .string {
+            color: $COLOR_JSON_STRING
+          }
+        }
+      }
+    }
+  }
+}
+
+.react-json-view {
+  padding: 0 44px 0 0;
+
+  overflow: hidden;
+  word-wrap: anywhere;
+
+  @include textCode;
+}
+
+.simplebar-track {
+  background-color: rgba(225, 225, 225, 0.2);
+  border-radius: 18px;
+
+  &.simplebar-vertical {
+    width: 4px;
+  }
+}
+.simplebar-scrollbar {
+  background-color: rgba(225, 225, 225, 0.6);
+  opacity: .6;
+  width: 4px;
+  border-radius: 18px;
+}
+
+@media #{$tb-max} {
+  .content {
+    &__title {
+      &_main {
+        @include grid-column(1, 12);
+      }
+    }
+    &__method {
+      @include grid-column(1, 12);
+    }
+    &__examples {
+      @include grid-column(1, 12);
+    }
+    &__server {
+      @include grid-column(1, 12);
+    }
+  }
+}
+
+@media #{$sm-max} {
+  .content {
+    padding: 60px 20px 0;
+
+    &__server {
+      grid-template-rows: auto;
+      grid-template-columns: 1fr;
+      grid-gap: 16px;
+      padding-right: 0;
+    }
+    &__element {
+      &_container {
+        overflow: auto;
+      }
+    }
+    &__method {
+      padding-right: 0;
+    }
+    &__title {
+      &_main {
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+@media #{$sx-max} {
+  .content {
+    grid-template-columns: repeat(6, 1fr);
+
+    &__container {
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    &__title {
+      &_main {
+        @include grid-column(1, 6);
+      }
+    }
+    &__method {
+      @include grid-column(1, 6);
+    }
+    &__examples {
+      @include grid-column(1, 6);
+    }
+    &__server {
+      @include grid-column(1, 6);
+    }
+  }
+}

@@ -1,0 +1,155 @@
+$COLOR_BLACK: #000000;
+$COLOR_COSMOS: #141E2D;
+$COLOR_BASIC_BLUE: #3393FF;
+$COLOR_BASIC_BLUE_HOVER: #2184F8;
+$COLOR_BASIC_BLUE_ACTIVE: #1275EF;
+$COLOR_BLUE: #4646F0;
+$COLOR_AZURE: #00D2E6;
+$COLOR_GREEN_1: #0DEFAB;
+$COLOR_GREEN_2: #0EC891;
+$COLOR_WHITE_1: #FFFFFF;
+$COLOR_WHITE_2: #F5F8FB;
+$COLOR_GREY_1: #E6EFF8;
+$COLOR_GREY_2: #B7C3D2;
+$COLOR_GREY_3: #8997AC;
+$COLOR_GREY_4: #71839E;
+$COLOR_JSON_STRING: #EDA987;
+$COLOR_JSON_SIMPLE: #F5F5F5;
+$COLOR_JSON_BOOLEAN: #E1A3EE;
+$COLOR_JSON_WRAPPER: #062436;
+
+:export {
+  colorBlack: $COLOR_BLACK;
+  colorCosmos: $COLOR_COSMOS;
+  colorBlue: $COLOR_BLUE;
+  colorBasicBlue: $COLOR_BASIC_BLUE;
+  colorBasicBlueHover: $COLOR_BASIC_BLUE_HOVER;
+  colorBasicBlueActive: $COLOR_BASIC_BLUE_ACTIVE;
+  colorAzure: $COLOR_AZURE;
+  colorGreen1: $COLOR_GREEN_1;
+  colorGreen2: $COLOR_GREEN_2;
+  colorWhite1: $COLOR_WHITE_1;
+  colorWhite2: $COLOR_WHITE_2;
+  colorGrey1: $COLOR_GREY_1;
+  colorGrey2: $COLOR_GREY_2;
+  colorGrey3: $COLOR_GREY_3;
+  colorGrey4: $COLOR_GREY_4;
+  colorJsonString: $COLOR_JSON_STRING;
+  colorJsonSimple: $COLOR_JSON_SIMPLE;
+  colorJsonBoolean: $COLOR_JSON_BOOLEAN;
+  colorJsonWrapper: $COLOR_JSON_WRAPPER;
+}
+
+@mixin positionCenterTop {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin positionCenterLeft {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin positionCenterBottom {
+  bottom: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin positionCenterRight {
+  right: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin baseBlock {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+@mixin title {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 36px;
+  letter-spacing: -0.28px;
+}
+
+@mixin subTitle {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 31px;
+  letter-spacing: -0.24px;
+}
+
+@mixin text1Regular {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+@mixin text1Medium {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+@mixin text2Medium {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+@mixin extraTextRegular {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+@mixin extraTextMedium {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+@mixin smallTextRegular {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 14px;
+}
+
+@mixin buttonText {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+@mixin textCode {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 25px;
+}
+
+
+@mixin custom-media($breakpoint) {
+  @media only screen and (max-width: #{$breakpoint}) {
+    @content;
+  }
+}
+
+$sx-max: only screen and (max-width: 559px);
+$sm-max: only screen and (max-width: 799px);
+$tb-max: only screen and (max-width: 959px);
+$md-max: only screen and (max-width: 1259px);
+$lg-max: only screen and (max-width: 1599px);
+
+@mixin grid-column($start, $weight) {
+  grid-column: $start / span $weight
+}
+
+@function repeat-value($value, $count) {
+  $result: '';
+  @for $i from 1 through $count {
+    $result: $result + $value + ' ';
+  }
+  @return $result;
+}

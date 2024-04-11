@@ -1,0 +1,80 @@
+@import "variable";
+
+@font-face {
+  font-family: TTNorms;
+  src:
+          url('../fonts/woff2/TT_Norms_Pro_Medium.woff2') format('woff2'),
+          url('../fonts/woff/TT_Norms_Pro_Medium.woff') format('woff'),
+          url('../fonts/eot/TT_Norms_Pro_Medium.eot') format('embedded-opentype'),
+          url('../fonts/otf/TT_Norms_Pro_Medium.otf') format('opentype'),
+          url('../fonts/ttf/TT_Norms_Pro_Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: TTNorms;
+  src:
+          url('../fonts/woff2/TT_Norms_Pro_Regular.woff2') format('woff2'),
+          url('../fonts/woff/TT_Norms_Pro_Regular.woff') format('woff'),
+          url('../fonts/eot/TT_Norms_Pro_Regular.eot') format('embedded-opentype'),
+          url('../fonts/otf/TT_Norms_Pro_Regular.otf') format('opentype'),
+          url('../fonts/ttf/TT_Norms_Pro_Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+
+html {
+  font-family: TTNorms, Verdana, Geneva, sans-serif;
+  @include text1Regular;
+  color: $COLOR_COSMOS;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+span,
+a,
+ul,
+div,
+button {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+
+  @include baseBlock;
+  min-height: 100vh;
+}
+
+button {
+  text-decoration: none;
+  background-color: unset;
+  border: none;
+  cursor: pointer;
+
+  @include buttonText
+}
+
+.link {
+  color: $COLOR_BASIC_BLUE;
+  text-decoration-skip-ink: none;
+
+  &:hover {
+    color: $COLOR_BASIC_BLUE_HOVER;
+  }
+  &:active {
+    color: $COLOR_BASIC_BLUE_ACTIVE;
+  }
+}
+
+.fw500 {
+  font-weight: 500;
+}

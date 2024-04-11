@@ -1,0 +1,75 @@
+const https = require('https');
+
+let login = '<LOGIN>';
+let password = '<PASSWORD>';
+
+// получение токена
+let post_data = JSON.stringify({
+    'jsonrpc':'2.0',
+    'method':'getToken',
+    'params':{
+        'login': login,
+        'password': password
+    }
+});
+
+let post_options = {
+    host: 'api.sweb.ru',
+    port: 443,
+    path: '/notAuthorized',
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Accept': 'application/json'
+    }
+};
+let req = https.request(post_options, (res) => {
+    let data = '';
+    res.on('data', (chunk) => {
+        data += chunk;
+    });
+
+    res.on('end', () => {
+        let result = JSON.parse(data);
+        // вызов метода API после получения токена
+        result.result && move(result.result)
+    });
+});
+req.write(post_data);
+req.end();
+
+// пример вызова метода API с полученным токеном
+const move = (token) => {
+    let post_data = JSON.stringify({
+        'jsonrpc':'2.0',
+        'method':'move',
+        'params':{
+            'domain': 'mysite.ru',
+            'prolongType': 'no'
+        }
+    });
+
+    let post_options = {
+        host: 'api.sweb.ru',
+        port: 443,
+        path: '/domains',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    };
+    let req = https.request(post_options, (res) => {
+        let data = '';
+        res.on('data', (chunk) => {
+            data += chunk;
+        });
+
+        res.on('end', () => {
+            let result = JSON.parse(data);
+        });
+    });
+    req.write(post_data);
+    req.end();
+}

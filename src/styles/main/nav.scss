@@ -1,0 +1,201 @@
+@import "../variable";
+
+@mixin leftBoard {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: $COLOR_GREY_1;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  height: max-content;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  &__tablet {
+    @include baseBlock;
+    height: max-content;
+
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 20px 9px;
+
+    background-color: $COLOR_WHITE_2;
+    cursor: pointer;
+    width: 100%;
+
+    &_container {
+      @include baseBlock;
+      margin-left: 12px;
+    }
+
+    &_title {
+      @include text1Medium;
+    }
+
+    &_subtitle {
+      white-space: nowrap;
+    }
+
+  }
+  &__container {
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    height: 100%;
+  }
+
+  &__link {
+    position: relative;
+    height: min-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &:after {
+      @include leftBoard
+    }
+
+    &_title {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      padding: 5.5px 0 5.5px 12px;
+      text-decoration: none;
+      color: $COLOR_COSMOS;
+      @include text1Medium;
+
+      & + ul {
+        overflow: hidden;
+        height: 0;
+      }
+
+      &:hover {
+        &:after {
+          @include leftBoard;
+
+          background-color: $COLOR_BASIC_BLUE;
+          opacity: 0.4;
+          z-index: 1;
+        }
+      }
+
+      &.active {
+        &:after {
+          @include leftBoard;
+
+          background-color: $COLOR_BASIC_BLUE;
+          z-index: 1;
+        }
+
+        & + .nav__category {
+          height: 100%;
+          margin-top: 12px;
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+  &__category {
+    position: relative;
+    width: 100%;
+    margin-left: 12px;
+
+    &_link {
+      display: inline-block;
+      text-decoration: none;
+      color: $COLOR_COSMOS;
+      padding: 2.5px 0 2.5px 12px;
+      cursor: pointer ;
+
+      &-method {
+        &.active {
+          @include extraTextMedium;
+          color: $COLOR_BASIC_BLUE;
+        }
+      }
+
+      &.active {
+        &:after {
+          @include leftBoard;
+
+          background-color: $COLOR_BASIC_BLUE;
+          z-index: 1;
+        }
+
+        & + .nav__category.active {
+          height: 100%;
+          margin: 12px 0 12px 12px;
+        }
+      }
+
+      &:hover {
+        &:after {
+          @include leftBoard;
+
+          background-color: $COLOR_BASIC_BLUE;
+          opacity: 0.4;
+          z-index: 1;
+        }
+      }
+
+      & + ul {
+        overflow: hidden;
+        height: 0;
+      }
+    }
+  }
+}
+
+@media #{$sm-max} {
+  .nav {
+    position: fixed;
+    top: 60px;
+    height: min-content;
+
+    &.open {
+      height: 100%;
+    }
+
+    &.fixed {
+      top: 0;
+    }
+
+    width: 100%;
+    &__tablet {
+      display: flex;
+    }
+
+    &__container {
+      height: 0;
+      background-color: $COLOR_WHITE_2;
+      z-index: 15;
+
+      visibility: hidden;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0 20px;
+
+      &.open {
+        height: 100%;
+
+        visibility: visible;
+        opacity: 1;
+        transition: all 0.3s ease;
+        border-top: 1px solid $COLOR_GREY_1;
+        padding: 20px;
+      }
+    }
+  }
+}

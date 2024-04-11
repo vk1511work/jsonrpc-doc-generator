@@ -1,0 +1,145 @@
+{
+  "openrpc": "1.0.0-rc1",
+  "info": {
+    "title": "API Spaceweb",
+    "description": "Документация по API Spaceweb",
+    "version": "1.185"
+  },
+  "servers": [
+    {
+      "name": "Account",
+      "summary": "Объект аккаунта",
+      "description": "Основные функции:\n\nполучение информации\nзаполнение реквизитов\nизменение данных",
+      "url": "https://api.sweb.ru/account"
+    }
+  ],
+  "methods": [
+    {
+      "name": "sendRequestChangeEmail",
+      "description": "Метод для запроса смены email аккаунта",
+      "params": [
+        {
+          "name": "newEmail",
+          "description": "новый email",
+          "schema": {
+            "$ref": "#/components/schemas/String"
+          }
+        },
+        {
+          "name": "password",
+          "description": "новый пароль",
+          "schema": {
+            "$ref": "#/components/schemas/String"
+          }
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/result"
+      },
+      "examples": [
+        {
+          "name": "exampleSendRequestChangeEmail",
+          "params": [
+            {
+              "$ref": "#/components/examples/stringEmail"
+            },
+            {
+              "$ref": "#/components/examples/stringPassword"
+            }
+          ],
+          "result": {
+            "$ref": "#/components/examples/integerOne"
+          }
+        }
+      ],
+      "links": [
+        {
+          "name": "confirmChangeEmailLink",
+          "description": "Подтверждение смены емейла",
+          "method": "confirmChangeEmail",
+          "params": {
+            "key": "$params.key"
+          }
+        }
+      ]
+    },
+    {
+      "name": "confirmChangeEmail",
+      "description": "Подтверждение смены емейла",
+      "params": [
+        {
+          "name": "key",
+          "schema": {
+            "$ref": "#/components/schemas/String"
+          }
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/result"
+      },
+      "examples": [
+        {
+          "name": "exampleConfirmChangeEmail",
+          "params": [
+            {
+              "$ref": "#/components/examples/stringEmail"
+            }
+          ],
+          "result": {
+            "$ref": "#/components/examples/integerOne"
+          }
+        }
+      ],
+      "links": [
+        {
+          "name": "sendRequestChangeEmailLink",
+          "description": "запрос на смену емейла",
+          "method": "sendRequestChangeEmail",
+          "params": {
+            "newEmail": "$params.newEmail",
+            "password": "$params.password"
+          }
+        }
+      ]
+    }
+  ],
+  "components": {
+    "contentDescriptors": {
+      "result": {
+        "name": "result",
+        "description": "1 - успешно, 0 - ошибка",
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "schemas": {
+      "Integer": {
+        "type": "integer"
+      },
+      "String": {
+        "type": "string"
+      }
+    },
+    "examples": {
+      "integerOne": {
+        "name": "one",
+        "summary": "успех",
+        "description": "Ответ при успешно выполненной операции",
+        "value": 1
+      },
+      "stringEmail": {
+        "name": "email",
+        "summary": "email",
+        "description": "ящик электронной почты",
+        "value": "test@mail.ru"
+      },
+      "stringPassword": {
+        "name": "password",
+        "summary": "пароль",
+        "description": "пароль соответствующий требованиям безопасности",
+        "value": "......."
+      }
+    }
+  }
+}

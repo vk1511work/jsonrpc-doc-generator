@@ -1,0 +1,32 @@
+import requests
+import json
+
+# получение токена
+data = {
+    'jsonrpc':'2.0',
+    'method':'getToken',
+    'params':{
+        'login':'<LOGIN>',
+        'password':'<PASSWORD>'
+    }
+}
+headers = {
+    'Content-Type':'application/json; charset=utf-8',
+    'Accept':'application/json'
+}
+response = requests.post("https://api.sweb.ru/notAuthorized/", json=data, headers=headers)
+result = json.loads(response.text)
+
+# пример вызова метода API с полученным токеном
+if 'result' in result:
+
+    headers['Authorization'] = 'Bearer ' + result.get('result')
+    data = {
+    'jsonrpc':'2.0',
+    'method':'move',
+    'params':{
+            'domain':'mysite.ru',
+            'prolongType':'no'
+        }
+    }
+    response = requests.post("https://api.sweb.ru/domains/", json=data, headers=headers)
