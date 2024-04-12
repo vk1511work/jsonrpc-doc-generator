@@ -1,17 +1,17 @@
-# Генератор документации OpenRPC на React
+# OpenRPC Documentation Generator
 
-## Установка и запуск
+## Getting started
 
 ```shell
 docker-compose build
 docker-compose up
 ```
-Сервис будет доступен на http://localhost:3000
-## Схемы
+Service will be available on http://localhost:3000
+## OpenRPC
 
-Разместите нужные OpenRPC схемы в директории `src/schema` и обновите меню и роутинг в `src/schema/constantRoute.js`
+Put your OpenRPC schemas into `src/schema` and change routing in `src/schema/constantRoute.js`
 
-## Примеры и инструкции
+## Examples and instructions
 
-Отредактируйте в компоненте `src/Components/Main/organisms/Instructions.js` инструкцию по использованию.
-Отредактируйте в компоненте `src/Components/Main/organisms/Examples.js` примеры.
+You can create actual instruction for your API in `src/Components/Main/organisms/Instructions.js`
+and examples in `src/Components/Main/organisms/Examples.js`.
